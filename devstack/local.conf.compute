@@ -1,0 +1,46 @@
+[[local|localrc]]
+ 
+# Credentials
+DATABASE_PASSWORD=password
+ADMIN_PASSWORD=password
+SERVICE_PASSWORD=password
+SERVICE_TOKEN=password
+RABBIT_PASSWORD=password
+ 
+# Services
+ENABLED_SERVICES=rabbit
+ENABLED_SERVICES+=,n-cpu,n-novnc,n-cauth
+ENABLED_SERVICES+=,neutron,q-agt
+ 
+# MULTI_HOST
+MULTI_HOST=1
+ 
+# Services IP
+HOST_IP=10.211.55.8
+SERVICE_HOST=10.211.55.13
+MYSQL_HOST=10.211.55.13            #internal IP
+RABBIT_HOST=10.211.55.13           #internal IP
+GLANCE_HOSTPORT=10.211.55.13:9292  #internal IP
+Q_HOST=10.211.55.13
+ 
+# Neutron OVS (flat)
+Q_PLUGIN=ml2
+Q_AGENT_EXTRA_OVS_OPTS=(tenant_network_type=local)
+#Q_ML2_PLUGIN_TYPE_DRIVERS=local,flat
+Q_AGENT_EXTRA_OVS_OPTS=(network_vlan_ranges=physnet1)
+OVS_VLAN_RANGE=physnet1
+PHYSICAL_NETWORK=physnet1
+OVS_PHYSICAL_BRIDGE=br-ex
+ 
+# Enable Logging
+LOGFILE=/opt/stack/logs/stack.sh.log
+VERBOSE=True
+LOG_COLOR=True
+SCREEN_LOGDIR=/opt/stack/logs
+RECLONE=True
+
+# vnc
+NOVA_VNC_ENABLED=True
+NOVNCPROXY_URL="http://192.168.100.8:6080/vnc_auto.html"
+VNCSERVER_LISTEN=$HOST_IP
+VNCSERVER_PROXYCLIENT_ADDRESS=$VNCSERVER_LISTEN

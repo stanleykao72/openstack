@@ -1,0 +1,70 @@
+[[local|localrc]]
+ 
+# Credentials
+DATABASE_PASSWORD=password
+ADMIN_PASSWORD=password
+SERVICE_PASSWORD=password
+SERVICE_TOKEN=password
+RABBIT_PASSWORD=password
+ 
+# Services
+ENABLED_SERVICES=rabbit,mysql,key
+ENABLED_SERVICES+=,n-api,n-crt,n-obj,n-cond,n-sch,n-novnc,n-cauth,n-cpu
+ENABLED_SERVICES+=,neutron,q-svc,q-agt,q-dhcp,q-l3,q-meta
+ENABLED_SERVICES+=,g-api,g-reg
+ENABLED_SERVICES+=,cinder,c-api,c-vol,c-sch,c-bak
+ENABLED_SERVICES+=,horizon
+
+## Neutron - Load Balancing
+ENABLED_SERVICES+=,q-lbaas
+
+## Neutron - VPN as a Service
+ENABLED_SERVICES+=,q-vpn
+
+## Neutron - Firewall as a Service
+ENABLED_SERVICES+=,q-fwaas
+
+##################Ceilometer服务配置############################
+# Ceilometer - Metering Service (metering + alarming)
+#CEILOMETER_BACKEND=mysql
+ENABLED_SERVICES+=,ceilometer-acompute,ceilometer-acentral,ceilometer-collector,ceilometer-api
+ENABLED_SERVICES+=,ceilometer-alarm-notify,ceilometer-alarm-eval
+
+##############keystone和swift采用apache作为web前端配置###########
+# Apache fronted for WSGI
+APACHE_ENABLED_SERVICES+=keystone
+#,swift
+
+ 
+# MULTI_HOST
+MULTI_HOST=1
+ 
+# Services IP
+HOST_IP=10.211.55.13
+FIXED_RANGE=10.32.14.0/24
+NETWORK_GATEWAY=10.32.14.254
+FIXED_NETWORK_SIZE=256
+FLOATING_RANGE=10.211.55.0/24
+PUBLIC_NETWORK_GATEWAY=10.211.55.1
+Q_FLOATING_ALLOCATION_POOL=start=10.211.55.101,end=10.211.55.200
+ 
+# Neutron OVS (flat)
+Q_PLUGIN=ml2
+Q_AGENT_EXTRA_OVS_OPTS=(tenant_network_type=local)
+#Q_ML2_PLUGIN_TYPE_DRIVERS=local,flat
+Q_AGENT_EXTRA_OVS_OPTS=(network_vlan_ranges=physnet1)
+OVS_VLAN_RANGE=physnet1
+PHYSICAL_NETWORK=physnet1
+OVS_PHYSICAL_BRIDGE=br-ex
+ 
+# Images
+# Use this image when creating test instances
+IMAGE_URLS+=",http://cdn.download.cirros-cloud.net/0.3.2/cirros-0.3.2-x86_64-disk.img"
+IMAGE_URLS+=",http://uec-images.ubuntu.com/releases/14.04/release/ubuntu-14.04-server-cloudimg-amd64-disk1.img"
+ 
+# Enable Logging
+LOGFILE=/opt/stack/logs/stack.sh.log
+VERBOSE=True
+LOG_COLOR=True
+SCREEN_LOGDIR=/opt/stack/logs
+RECLONE=True

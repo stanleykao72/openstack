@@ -1,0 +1,13 @@
+1.
+nova flavor-create --ephemeral 20 --swap 256 --rxtx-factor 1.0 --is-public yes f1.micro 10 512 20 1
+nova flavor-create --ephemeral 20 --swap 512 --rxtx-factor 1.0 --is-public yes f1.small 11 1024 20 1
+nova flavor-create --ephemeral 20 --swap 1024 --rxtx-factor 1.0 --is-public yes f1.compile 12 2048 20 2
+
+nova flavor-create --ephemeral 20 --swap 256 --rxtx-factor 1.0 --is-public yes f2.micro 20 512 5 1
+nova flavor-create --ephemeral 20 --swap 512 --rxtx-factor 1.0 --is-public yes f2.small 21 1024 5 1
+nova flavor-create --ephemeral 20 --swap 1024 --rxtx-factor 1.0 --is-public yes f2.compile 22 2048 5 2
+
+
+2.
+
+
